@@ -103,8 +103,14 @@
     <button onclick="appendValue('.')">.</button>
     <button onclick="appendValue('+')">+</button>
     <button onclick="calculateResult()" class="equal-small">=</button>
+	
+	<!-- Botones fila 5 -->
+    <button onclick="calculateSqrt()">sqrt</button>
+    <button onclick="calculateFactorial()">!</button>
+    <button onclick=""></button>
+    <button onclick=""></button>
 
-    <!-- Botones fila 5 (botón limpiar a la izquierda y botón igual a la derecha) -->
+    <!-- Botones fila 6 (botón limpiar a la izquierda y botón igual a la derecha) -->
     <button class="clear-btn" onclick="clearDisplay()">C</button>
     <button class="equal-btn" onclick="calculateResult()">=</button>
   </div>
@@ -129,6 +135,53 @@
     function clearDisplay() {
       document.getElementById("display").value = "";
     }
+	
+	function calculateSqrt(){
+		const display = document.getElementById("display");
+		display.value = Math.sqrt(display.value) ;
+	}
+	
+	function calculateFactorial(){
+		const display = document.getElementById("display");
+		display.value = factorial(display.value) ;
+	}
+	
+	
+	function factorial(num) {
+
+	  let resultado = 1;
+	  for (let i = 1; i <= num; i++) {
+		resultado = resultado * i; 
+	  }
+	  return resultado;
+	}
+ 
+ 
+ 
+     // --- Escuchar eventos de teclado en todo el documento ---
+    document.addEventListener('keydown', function(e) {
+      const display = document.getElementById("display");
+      const allowedKeys = ['0','1','2','3','4','5','6','7','8','9','.','+','-','*','/'];
+
+      // Si la tecla está permitida (número, operador o punto decimal)
+      if (allowedKeys.includes(e.key)) {
+        appendValue(e.key);
+      
+      // Si es Enter, calculamos
+      } else if (e.key === 'Enter') {
+        calculateResult();
+
+      // Si es Backspace, borramos un caracter
+      } else if (e.key === 'Backspace') {
+        display.value = display.value.slice(0, -1);
+
+      // Si es Escape, limpiamos el display
+      } else if (e.key === 'Escape') {
+        clearDisplay();
+      }
+    });
+
+
   </script>
 </body>
 </html>
