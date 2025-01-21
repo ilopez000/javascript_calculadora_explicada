@@ -107,8 +107,8 @@
 	<!-- Botones fila 5 -->
     <button onclick="calculateSqrt()">sqrt</button>
     <button onclick="calculateFactorial()">!</button>
-    <button onclick=""></button>
-    <button onclick=""></button>
+    <button onclick="appendValue('(')">(</button>
+    <button onclick="appendValue(')')">)</button>
 
     <!-- Botones fila 6 (botón limpiar a la izquierda y botón igual a la derecha) -->
     <button class="clear-btn" onclick="clearDisplay()">C</button>
@@ -159,26 +159,27 @@
  
  
      // --- Escuchar eventos de teclado en todo el documento ---
-    document.addEventListener('keydown', function(e) {
-      const display = document.getElementById("display");
-      const allowedKeys = ['0','1','2','3','4','5','6','7','8','9','.','+','-','*','/'];
+    document.addEventListener('keydown', 
+	function(e) {
+		  const display = document.getElementById("display");
+		  const allowedKeys = ['(',')','0','1','2','3','4','5','6','7','8','9','.','+','-','*','/'];
 
-      // Si la tecla está permitida (número, operador o punto decimal)
-      if (allowedKeys.includes(e.key)) {
-        appendValue(e.key);
-      
-      // Si es Enter, calculamos
-      } else if (e.key === 'Enter') {
-        calculateResult();
+		  // Si la tecla está permitida (número, operador o punto decimal)
+		  if (allowedKeys.includes(e.key)) {
+			appendValue(e.key);
+		  
+		  // Si es Enter, calculamos
+		  } else if (e.key === 'Enter') {
+			calculateResult();
 
-      // Si es Backspace, borramos un caracter
-      } else if (e.key === 'Backspace') {
-        display.value = display.value.slice(0, -1);
+		  // Si es Backspace, borramos un caracter
+		  } else if (e.key === 'Backspace') {
+			display.value = display.value.slice(0, -1);
 
-      // Si es Escape, limpiamos el display
-      } else if (e.key === 'Escape') {
-        clearDisplay();
-      }
+		  // Si es Escape, limpiamos el display
+		  } else if (e.key === 'Escape') {
+			clearDisplay();
+		  }
     });
 
 
